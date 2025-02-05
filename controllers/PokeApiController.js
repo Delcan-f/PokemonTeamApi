@@ -26,7 +26,7 @@ router.get("/style1/:name",
     let pokeApiResponse = await fetch("https://pokeapi.co/api/v2/pokemon/" + request.params.name);
     let pokeApiData = await pokeApiResponse.json();
 
-    respoinse.json({
+    response.json({
         name: pokeApiData.name
     });
 });

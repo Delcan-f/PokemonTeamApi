@@ -8,7 +8,7 @@ const app = express();
 
 app.get("/", (request, response) => {
     response.json({
-        message: "Hellow, world!"
+        message: "Hello, world!"
     });
 });
 
