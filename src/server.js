@@ -6,6 +6,33 @@ const express = require("express");
 // Create an instance of the Express system 
 const app = express();
 
+const mongoose = require("mongoose");
+
+let databaseUrl = "";
+switch (process.env.NODE_ENV?.toLocaleLowerCase()) {
+    case "test":
+        databaseUrl = "mongodb://localhost:27017/ExpressBuildAnAPI-test"
+        break;
+    case "dev":
+    case "development":
+        databaseUrl = "mongodb://localhost:27017/ExpressBuildAnAPI-dev"
+        break;
+    
+    case "production":
+        case "prod":
+            databaseUrl = process.env.DATABASE_URL;
+            break;
+
+        default:
+            console.error("Incorrect environment detected");
+            process.exit();
+            // break;
+}
+// After figuring out the DB URL,
+// Connect to the DB using the URL 
+const { connect } = require ("./database.js")
+connect(databaseUrl)
+
 app.get("/", (request, response) => {
     response.json({
         message: "Hello, world!"
