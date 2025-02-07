@@ -1,4 +1,5 @@
 const express = require("express");
+const { TeamModel } = require("../models/TeamModel");
 const router = express.Router();
 
 //							  teamid is a MongoDB document/object ID
@@ -18,8 +19,10 @@ router.get(
 	"/all",  // route path 
 	async (request, response) => { // route final callback 
 		
+		let teamData = await TeamModel.find();
+
 		response.json({
-			
+			data: teamData
 		});
 	}
 );
@@ -29,8 +32,12 @@ router.post(
 	"/",  // route path 
 	async (request, response) => { // route final callback 
 		
+
+		let newTeam = await TeamModel.create(request.body.teamData);
+
 		response.json({
-			
+			// requestBody: request.body,
+			team: newTeam
 		});
 	}
 );
@@ -46,6 +53,7 @@ router.patch(
 	}
 );
 
+
 // http://localhost:5678/team/0813uropqieawknfgoadljkvhga
 router.delete(
 	"/:teamid",  // route path 
@@ -56,6 +64,7 @@ router.delete(
 		});
 	}
 );
+
 
 module.exports = {
 	TeamRouter: router

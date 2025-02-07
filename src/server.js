@@ -6,6 +6,9 @@ const express = require("express");
 // Create an instance of the Expres system 
 const app = express();
 
+// Lets us send in JSON as body data on a request 
+app.use(express.json());
+
 const mongoose = require("mongoose");
 
 let databaseUrl = "";
@@ -62,8 +65,7 @@ const {PokeApiRouter} = require("./controllers/PokeApiController.js");
 app.use("/pokeapi", PokeApiRouter);
 
 const {TeamRouter} = require("./controllers/TeamController.js");
-app.use("/team", TeamRouter)
-
+app.use("/team", TeamRouter);
 
 
 
